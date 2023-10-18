@@ -26,5 +26,5 @@ packages:
   - git: "https://github.com/superbolt-x/bolt-dbt-googleanalytics-package.git"
     revision: main
 
- - git: "https://github.com/superbolt-x/bolt-dbt-ga4-package.git"
+  - git: "https://github.com/superbolt-x/bolt-dbt-ga4-package.git"
     revision: main
