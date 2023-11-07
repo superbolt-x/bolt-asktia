@@ -26,6 +26,7 @@ WITH cleaned_ad_data as
         END as {{ adapter.quote('description_'~description_id) }},
       {% endfor %}
         ad_final_urls,
+        status,
         cost_micros/1000000 as spend,
         clicks,
         impressions
@@ -44,6 +45,7 @@ ad_strength,
 {{ adapter.quote('description_'~description_id) }},
 {% endfor %}
 ad_final_urls,
+status,
 COALESCE(SUM(spend),0) as spend,
 COALESCE(SUM(impressions),0) as impressions,
 COALESCE(SUM(clicks),0) as clicks,
@@ -69,4 +71,5 @@ ad_strength,
 {% for description_id in description_ids %}
 {{ adapter.quote('description_'~description_id) }},
 {% endfor %}
-ad_final_urls
+ad_final_urls,
+status
