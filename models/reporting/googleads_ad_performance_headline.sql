@@ -46,7 +46,7 @@ ad_strength,
 ad_final_urls,
 COALESCE(SUM(spend),0) as spend,
 COALESCE(SUM(impressions),0) as impressions,
-COALESCE(SUM(clicks) as clicks,
+COALESCE(SUM(clicks),0) as clicks,
 COALESCE(SUM(raspberry),0) as purchases,
 COALESCE(SUM(pink),0) as leads,
 FROM cleaned_ad_data
