@@ -45,7 +45,7 @@ ad_strength,
 {% endfor %}
 ad_final_urls,
 COALESCE(SUM(spend),0) as spend,
-COALESCE(SUM(impressions) as impressions,
+COALESCE(SUM(impressions),0) as impressions,
 COALESCE(SUM(clicks) as clicks,
 COALESCE(SUM(raspberry),0) as purchases,
 COALESCE(SUM(pink),0) as leads,
