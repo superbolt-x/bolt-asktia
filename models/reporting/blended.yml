@@ -7,3 +7,6 @@ sources:
   tables:
     - name: ad_performance_report
       identifier: ad_performance_report
+
+    - name: ad_convtype_performance_report
+      identifier: ad_convtype_performance_report
