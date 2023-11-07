@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+
+- name: googleads_raw
+  schema: googleads_raw
+  tables:
+    - name: ad_performance_report
+      identifier: ad_performance_report
