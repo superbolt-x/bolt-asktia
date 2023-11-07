@@ -5,8 +5,11 @@
 {%- set headline_ids = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"]    -%}
 {%- set description_ids = ["1","2","3","4"]    -%}
   
-WITH cleaned_ad_data as
-    (SELECT date, customer_id, ad_group_id, campaign_id, ad_id, campaign_name, ad_group_name, ad_strength, status,
+WITH ads as 
+    (SELECT ad_id, ad_status FROM {{ source ('googleads_base','googleads_ads') }}),
+    
+    cleaned_ad_data as
+    (SELECT date, customer_id, ad_group_id, campaign_id, ad_id, campaign_name, ad_group_name, ad_strength,
       {% for headline_id in headline_ids %}
         CASE
             WHEN SPLIT_PART(SPLIT_PART(responsive_search_ad_headlines,'","assetPerformanceLabel"',{{ headline_id }}),'{"text":"',2) ~* '\u0027' 
@@ -45,15 +48,15 @@ ad_strength,
 {{ adapter.quote('description_'~description_id) }},
 {% endfor %}
 ad_final_urls,
-status,
+ad_status as status,
 COALESCE(SUM(spend),0) as spend,
 COALESCE(SUM(impressions),0) as impressions,
 COALESCE(SUM(clicks),0) as clicks,
 COALESCE(SUM(raspberry),0) as purchases,
 COALESCE(SUM(pink),0) as leads
 FROM cleaned_ad_data
-LEFT JOIN
-    (SELECT date, customer_id, ad_id, ad_group_id, campaign_id,
+LEFT JOIN ads USING(ad_id)
+LEFT JOIN (SELECT date, customer_id, ad_id, ad_group_id, campaign_id,
         COALESCE(SUM(CASE WHEN conversion_action_name = 'Google Adwords - Pink' THEN all_conversions END),0) as pink,
         COALESCE(SUM(CASE WHEN conversion_action_name = 'Google Adwords - Raspberry' THEN all_conversions END),0) as raspberry
     FROM {{ source ('googleads_raw','ad_convtype_performance_report') }}
