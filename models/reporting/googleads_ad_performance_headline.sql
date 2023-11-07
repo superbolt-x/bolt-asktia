@@ -48,7 +48,7 @@ COALESCE(SUM(spend),0) as spend,
 COALESCE(SUM(impressions),0) as impressions,
 COALESCE(SUM(clicks),0) as clicks,
 COALESCE(SUM(raspberry),0) as purchases,
-COALESCE(SUM(pink),0) as leads,
+COALESCE(SUM(pink),0) as leads
 FROM cleaned_ad_data
 LEFT JOIN
     (SELECT date, customer_id, ad_id, ad_group_id, campaign_id,
