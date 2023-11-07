@@ -10,3 +10,9 @@ sources:
 
     - name: ad_convtype_performance_report
       identifier: ad_convtype_performance_report
+
+- name: googleads_base
+  schema: googleads_base
+  tables:
+    - name: googleads_ads
+      identifier: googleads_ads
