@@ -6,7 +6,7 @@
 {%- set description_ids = ["1","2","3","4"]    -%}
   
 WITH ads as 
-    (SELECT ad_id, ad_status FROM {{ source ('googleads_base','googleads_ads') }}),
+    (SELECT ad_group_id, ad_id, ad_status FROM {{ source ('googleads_base','googleads_ads') }}),
     
     cleaned_ad_data as
     (SELECT date, customer_id, ad_group_id, campaign_id, ad_id, campaign_name, ad_group_name, ad_strength,
@@ -55,7 +55,7 @@ COALESCE(SUM(clicks),0) as clicks,
 COALESCE(SUM(raspberry),0) as purchases,
 COALESCE(SUM(pink),0) as leads
 FROM cleaned_ad_data
-LEFT JOIN ads USING(ad_id)
+LEFT JOIN ads USING(ad_group_id, ad_id)
 LEFT JOIN (SELECT date, customer_id, ad_id, ad_group_id, campaign_id,
         COALESCE(SUM(CASE WHEN conversion_action_name = 'Google Adwords - Pink' THEN all_conversions END),0) as pink,
         COALESCE(SUM(CASE WHEN conversion_action_name = 'Google Adwords - Raspberry' THEN all_conversions END),0) as raspberry
