@@ -9,21 +9,21 @@ WITH cleaned_ad_data as
     (SELECT date, customer_id, ad_group_id, campaign_id, ad_id, campaign_name, ad_group_name, ad_strength, status,
       {% for headline_id in headline_ids %}
         CASE
-            WHEN SPLIT_PART(SPLIT_PART(responsive_search_ad_headlines,'","assetPerformanceLabel"',headline_id|int),'{"text":"',2) ~* '\u0027' 
-                THEN REPLACE(SPLIT_PART(SPLIT_PART(responsive_search_ad_headlines,'","assetPerformanceLabel"',headline_id|int),'{"text":"',2),'\\u0027',CHR(39))
-            WHEN SPLIT_PART(SPLIT_PART(responsive_search_ad_headlines,'","assetPerformanceLabel"',headline_id|int),'{"text":"',2) ~* '\u0026' 
-                THEN REPLACE(SPLIT_PART(SPLIT_PART(responsive_search_ad_headlines,'","assetPerformanceLabel"',headline_id|int),'{"text":"',2),'\\u0026',CHR(38))
-            ELSE SPLIT_PART(SPLIT_PART(responsive_search_ad_headlines,'","assetPerformanceLabel"',headline_id|int),'{"text":"',2)
-        END as {{ adapter.quote('headline_'~headline_id) }},
+            WHEN SPLIT_PART(SPLIT_PART(responsive_search_ad_headlines,'","assetPerformanceLabel"',{{ headline_id }}|int),'{"text":"',2) ~* '\u0027' 
+                THEN REPLACE(SPLIT_PART(SPLIT_PART(responsive_search_ad_headlines,'","assetPerformanceLabel"',{{ headline_id }}|int),'{"text":"',2),'\\u0027',CHR(39))
+            WHEN SPLIT_PART(SPLIT_PART(responsive_search_ad_headlines,'","assetPerformanceLabel"',{{ headline_id }}|int),'{"text":"',2) ~* '\u0026' 
+                THEN REPLACE(SPLIT_PART(SPLIT_PART(responsive_search_ad_headlines,'","assetPerformanceLabel"',{{ headline_id }}|int),'{"text":"',2),'\\u0026',CHR(38))
+            ELSE SPLIT_PART(SPLIT_PART(responsive_search_ad_headlines,'","assetPerformanceLabel"',{{ headline_id }}|int),'{"text":"',2)
+        END as {{ adapter.quote('headline_'~{{ headline_id }}) }},
       {% endfor %}
       {% for description_id in description_ids %}
         CASE
-            WHEN SPLIT_PART(SPLIT_PART(responsive_search_ad_descriptions,'","assetPerformanceLabel"',description_id|int),'{"text":"',2) ~* '\u0027' 
-                THEN REPLACE(SPLIT_PART(SPLIT_PART(responsive_search_ad_descriptions,'","assetPerformanceLabel"',description_id|int),'{"text":"',2),'\\u0027',CHR(39))
-            WHEN SPLIT_PART(SPLIT_PART(responsive_search_ad_descriptions,'","assetPerformanceLabel"',description_id|int),'{"text":"',2) ~* '\u0026' 
-                THEN REPLACE(SPLIT_PART(SPLIT_PART(responsive_search_ad_descriptions,'","assetPerformanceLabel"',description_id|int),'{"text":"',2),'\\u0026',CHR(38))
-            ELSE SPLIT_PART(SPLIT_PART(responsive_search_ad_descriptions,'","assetPerformanceLabel"',description_id|int),'{"text":"',2)
-        END as {{ adapter.quote('description_'~description_id) }},
+            WHEN SPLIT_PART(SPLIT_PART(responsive_search_ad_descriptions,'","assetPerformanceLabel"',{{ description_id }}|int),'{"text":"',2) ~* '\u0027' 
+                THEN REPLACE(SPLIT_PART(SPLIT_PART(responsive_search_ad_descriptions,'","assetPerformanceLabel"',{{ description_id }}|int),'{"text":"',2),'\\u0027',CHR(39))
+            WHEN SPLIT_PART(SPLIT_PART(responsive_search_ad_descriptions,'","assetPerformanceLabel"',{{ description_id }}|int),'{"text":"',2) ~* '\u0026' 
+                THEN REPLACE(SPLIT_PART(SPLIT_PART(responsive_search_ad_descriptions,'","assetPerformanceLabel"',{{ description_id }}|int),'{"text":"',2),'\\u0026',CHR(38))
+            ELSE SPLIT_PART(SPLIT_PART(responsive_search_ad_descriptions,'","assetPerformanceLabel"',{{ description_id }}|int),'{"text":"',2)
+        END as {{ adapter.quote('description_'~{{ description_id }}) }},
       {% endfor %}
         ad_final_urls,
         cost_micros/1000000 as spend,
@@ -37,11 +37,11 @@ ad_id,
 campaign_name, 
 ad_group_name,
 ad_strength,
-{% for headline_id in headline_ids %}
-{{ adapter.quote('headline_'~headline_id) }},
+{% for {{ headline_id }} in {{ headline_id }}s %}
+{{ adapter.quote('headline_'~{{ headline_id }}) }},
 {% endfor %}
-{% for description_id in description_ids %}
-{{ adapter.quote('description_'~description_id) }},
+{% for {{ description_id }} in {{ description_id }}s %}
+{{ adapter.quote('description_'~{{ description_id }}) }},
 {% endfor %}
 ad_final_urls,
 COALESCE(SUM(spend),0) as spend,
@@ -63,10 +63,10 @@ ad_id,
 campaign_name, 
 ad_group_name,
 ad_strength,
-{% for headline_id in headline_ids %}
-{{ adapter.quote('headline_'~headline_id) }},
+{% for {{ headline_id }} in {{ headline_id }}s %}
+{{ adapter.quote('headline_'~{{ headline_id }}) }},
 {% endfor %}
-{% for description_id in description_ids %}
-{{ adapter.quote('description_'~description_id) }},
+{% for {{ description_id }} in {{ description_id }}s %}
+{{ adapter.quote('description_'~{{ description_id }}) }},
 {% endfor %}
 ad_final_urls
