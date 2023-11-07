@@ -37,11 +37,11 @@ ad_id,
 campaign_name, 
 ad_group_name,
 ad_strength,
-{% for {{ headline_id }} in {{ headline_id }}s %}
-{{ adapter.quote('headline_'~{{ headline_id }}) }},
+{% for headline_id in headline_ids %}
+{{ adapter.quote('headline_'~headline_id) }},
 {% endfor %}
-{% for {{ description_id }} in {{ description_id }}s %}
-{{ adapter.quote('description_'~{{ description_id }}) }},
+{% for description_id in description_ids %}
+{{ adapter.quote('description_'~description_id) }},
 {% endfor %}
 ad_final_urls,
 COALESCE(SUM(spend),0) as spend,
