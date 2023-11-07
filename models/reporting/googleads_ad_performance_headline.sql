@@ -48,7 +48,7 @@ ad_strength,
 {{ adapter.quote('description_'~description_id) }},
 {% endfor %}
 ad_final_urls,
-ad_status as status,
+ad_status,
 COALESCE(SUM(spend),0) as spend,
 COALESCE(SUM(impressions),0) as impressions,
 COALESCE(SUM(clicks),0) as clicks,
@@ -75,4 +75,4 @@ ad_strength,
 {{ adapter.quote('description_'~description_id) }},
 {% endfor %}
 ad_final_urls,
-status
+ad_status
