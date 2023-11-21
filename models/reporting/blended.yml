@@ -25,3 +25,15 @@ sources:
   tables:
     - name: googleads_ads
       identifier: googleads_ads
+
+- name: reporting
+  schema: reporting
+  tables:
+    - name: facebook_ad_performance
+      identifier: facebook_ad_performance
+
+    - name: googleads_campaign_performance
+      identifier: googleads_campaign_performance
+
+    - name: tiktok_ad_performance
+      identifier: tiktok_ad_performance
