@@ -11,6 +11,9 @@ sources:
     - name: ad_convtype_performance_report
       identifier: ad_convtype_performance_report
 
+    - name: campaign_convtype_performance_report
+      identifier: campaign_convtype_performance_report
+
 - name: googleads_base
   schema: googleads_base
   tables:
