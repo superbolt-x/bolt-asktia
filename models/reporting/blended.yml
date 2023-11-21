@@ -14,6 +14,12 @@ sources:
     - name: campaign_convtype_performance_report
       identifier: campaign_convtype_performance_report
 
+    - name: geo_performance_report
+      identifier: geo_performance_report
+
+    - name: geo_convtype_performance_report
+      identifier: geo_convtype_performance_report
+
 - name: googleads_base
   schema: googleads_base
   tables:
