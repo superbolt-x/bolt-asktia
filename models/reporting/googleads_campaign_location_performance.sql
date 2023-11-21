@@ -31,7 +31,7 @@ WITH campaigns_data as
         LEFT JOIN (SELECT date, campaign_id, geo_target_metro, geo_target_city, geo_target_state, 
                 coalesce(case when conversion_action_name = 'Google Adwords - Pink' then all_conversions end,0) as leads, 
                 coalesce(case when conversion_action_name = 'Google Adwords - Raspberry' then all_conversions end,0) as purchases
-            FROM {{ source ('googleads_raw','geo_convtype_performance_report') }}
+            FROM {{ source ('googleads_raw','geo_convtype_performance_report') }})
             USING(date,campaign_id,geo_target_metro,geo_target_city,geo_target_state))
     WHERE campaign_name ~* 'all'
     ORDER by date desc),
