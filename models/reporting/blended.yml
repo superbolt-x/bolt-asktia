@@ -29,11 +29,11 @@ sources:
 - name: reporting
   schema: reporting
   tables:
-    - name: facebook_ad_performance
+    - name: asktia_facebook_ad_performance
       identifier: facebook_ad_performance
 
-    - name: googleads_campaign_performance
+    - name: asktia_googleads_campaign_performance
       identifier: googleads_campaign_performance
 
-    - name: tiktok_ad_performance
+    - name: asktia_tiktok_ad_performance
       identifier: tiktok_ad_performance
