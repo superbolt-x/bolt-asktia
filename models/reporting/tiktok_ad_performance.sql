@@ -32,8 +32,8 @@ date_granularity,
 cost as spend,
 impressions,
 clicks,
-add_billing_events+search_events as purchases,
-add_billing_value+page_search_value as revenue,
-initiate_checkout_events+product_details_page_browse_events as leads,
+search_events as purchases,
+page_search_value as revenue,
+product_details_page_browse_events as leads,
 conversions
 FROM {{ ref('tiktok_performance_by_ad') }}
