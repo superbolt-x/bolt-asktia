@@ -55,4 +55,4 @@ onfacebook_leads as onplatform_leads,
 "offsite_conversion.custom.1216044982114674" as email_signup,
 "offsite_conversion.custom.485796842084919" as cervical_cancer_visit,
 "offsite_conversion.custom.291239861951635" as text_message
-FROM {{ ref('facebook_performance_by_ad') }}
+FROM {{ ref('facebook_performance_by_ad_region') }}
