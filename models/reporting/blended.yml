@@ -32,6 +32,9 @@ sources:
     - name: facebook_ad_performance
       identifier: asktia_facebook_ad_performance
 
+    - name: facebook_ad_region_performance
+      identifier: asktia_facebook_ad_region_performance
+
     - name: googleads_campaign_performance
       identifier: asktia_googleads_campaign_performance
 
