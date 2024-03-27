@@ -47,7 +47,7 @@ date_granularity,
 spend,
 impressions,
 link_clicks,
-add_to_cart,
+/%add_to_cart,%/
 "offsite_conversion.fb_pixel_custom.raspberry" as purchases,
 "offsite_conversion.fb_pixel_custom.pink" as leads,
 onfacebook_leads as onplatform_leads,
