@@ -19,6 +19,12 @@ CASE
     WHEN campaign_name = '[SGS] Prospecting - NY - Front Door Test - Purchases' THEN 'Front Door'
     ELSE 'Other'
 END as campaign_type_custom,
+CASE
+    WHEN (campaign_name ~* '- la -' OR campaign_name ~* '- ny -' OR campaign_name ~* '- phx -' OR campaign_name ~* '- az -' OR campaign_name ~* '- sf -') THEN 'Market Specific'
+    WHEN (campaign_name ~* 'all-markets' AND campaign_name ~* 'advantage+') THEN 'Adv+ Market Consolidated'
+    WHEN campaign_name ~* 'all-markets - evergreen'  THEN 'New Market Consolidated'
+    ELSE 'Other'
+END as campaign_type_market,
 CASE WHEN campaign_name ~* '- la -' /*OR adset_name ~* 'la -'*/ THEN 'LA'
     WHEN campaign_name ~* '- ny -' OR adset_name ~* 'ny -' THEN 'NY'
     WHEN campaign_name ~* '- phx -' OR campaign_name ~* '- az -' THEN 'PHX'
@@ -49,6 +55,11 @@ link_clicks,
 add_to_cart,
 "offsite_conversion.fb_pixel_custom.raspberry" as purchases,
 "offsite_conversion.fb_pixel_custom.pink" as leads,
+"offsite_conversion.fb_pixel_custom.pistachio" as pistachio,
+"offsite_conversion.fb_pixel_custom.poppy" as poppy,
+"offsite_conversion.fb_pixel_custom.oat" as oat,
+"offsite_conversion.fb_pixel_custom.gold" as gold,
+"offsite_conversion.fb_pixel_custom.clay" as clay,
 onfacebook_leads as onplatform_leads,
 "offsite_conversion.custom.264161598804766" as typeform_submit,
 "offsite_conversion.custom.1216044982114674" as email_signup,
