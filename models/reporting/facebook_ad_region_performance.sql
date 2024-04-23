@@ -19,6 +19,12 @@ CASE
     WHEN campaign_name = '[SGS] Prospecting - NY - Front Door Test - Purchases' THEN 'Front Door'
     ELSE 'Other'
 END as campaign_type_custom,
+CASE
+    WHEN (campaign_name ~* '- la -' OR campaign_name ~* '- ny -' OR campaign_name ~* '- phx -' OR campaign_name ~* '- az -' OR campaign_name ~* '- sf -') THEN 'Market Specific'
+    WHEN (campaign_name ~* 'all-markets' AND campaign_name ~* 'advantage+') THEN 'Adv+ Market Consolidated'
+    WHEN campaign_name ~* 'all-markets - evergreen'  THEN 'New Market Consolidated'
+    ELSE 'Other'
+END as campaign_type_market,
 CASE WHEN campaign_name ~* '- la -' /*OR adset_name ~* 'la -'*/ THEN 'LA'
     WHEN campaign_name ~* '- ny -' OR adset_name ~* 'ny -' THEN 'NY'
     WHEN campaign_name ~* '- phx -' OR campaign_name ~* '- az -' THEN 'PHX'
